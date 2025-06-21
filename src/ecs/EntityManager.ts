@@ -9,8 +9,10 @@ export class EntityManager {
         return entity;
     }
 
-    getEntity(id: number): Entity | undefined {
-        return this.entities.get(id);
+    getEntity(id: number): Entity {
+        const entity = this.entities.get(id);
+        if (!entity) throw new Error(`Entity with ID ${id} not found`);
+        return entity;
     }
 
     getAllEntities(): Entity[] {

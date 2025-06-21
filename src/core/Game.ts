@@ -11,7 +11,7 @@ export class Game {
     constructor() {
         this.eventBus = new EventBus();
         this.world = new World();
-        this.engine = new Engine(this.eventBus);
+        this.engine = new Engine(this.eventBus, this.world);
     }
 
     start() {
