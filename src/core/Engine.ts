@@ -2,7 +2,7 @@ import { EventBus } from '@core/EventBus';
 import { SystemManager } from '@ecs/SystemManager';
 import { World } from '@ecs/World';
 import { BattleSystem } from '@systems/BattleSystem';
-import {InputSystem} from "@systems/InputSystem.ts";
+import { InputSystem } from "@systems/InputSystem";
 import { DamageSystem } from '@systems/DamageSystem';
 
 export class Engine {

@@ -1,8 +1,10 @@
 import { EventBus } from '@core/EventBus';
 import { System } from '@ecs/System';
 import { World } from '@ecs/World';
-import { HealthComponent } from '@components/HealthComponent';
 import { Entity } from '@ecs/Entity';
+import { HealthComponent } from '@components/HealthComponent';
+import { NameComponent } from '@components/NameComponent';
+
 
 /**
  * DamageSystem is responsible for applying damage to entities
@@ -31,18 +33,24 @@ export class DamageSystem extends System {
     private onDamageApplied ({ targetId, damage }: { targetId: number; damage: number }) {
         const target: Entity = this.world.entityManager.getEntity(targetId);
         const healthStorage = this.world.getStorage<HealthComponent>('Health');
+        const nameStorage = this.world.getStorage<NameComponent>('Name');
         const health = healthStorage.get(target);
+        const name = nameStorage.get(target);
 
         if (!health) {
             console.warn(`⚠️ No HealthComponent found for entity ${targetId}`);
             return;
         }
+        if (!name) {
+            console.warn(`⚠️ No NameComponent found for entity ${targetId}`);
+            return;
+        }
 
         health.takeDamage(damage);
-        console.log(`💥 Entity ${targetId} took ${damage} damage! HP is now ${health.current}/${health.max}`);
+        console.log(`💥 Entity ${name.name} took ${damage} damage! HP is now ${health.current}/${health.max}`);
 
         if (health.current <= 0) {
-            console.log(`💀 Entity ${targetId} has fainted.`);
+            console.log(`💀 Entity ${name.name} has fainted.`);
             this.eventBus.emit('pokemonFainted', { entityId: targetId });
         }
     }

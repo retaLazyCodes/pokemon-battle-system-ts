@@ -1,37 +1,77 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-
-    /* Alias */
-    "baseUrl": "./src",
-    "paths": {
-      "@core/*": ["core/*"],
-      "@ecs/*": ["ecs/*"],
-      "@components/*": ["components/*"],
-      "@systems/*": ["systems/*"],
-      "@models/*": ["models/*"],
-      "@ui/*": ["ui/*"],
-      "@data/*": ["data/*"],
-      "@utils/*": ["utils/*"]
+    "compilerOptions": {
+        "target": "ES2020",
+        "useDefineForClassFields": true,
+        "module": "ESNext",
+        "lib": [
+            "ES2020",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "skipLibCheck": true,
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "isolatedModules": true,
+        "moduleDetection": "force",
+        "noEmit": true,
+        "outDir": "dist",
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedSideEffectImports": true,
+        /* Alias */
+        "baseUrl": "./src",
+        "paths": {
+            "@core/*": [
+                "core/*"
+            ],
+            "@ecs/*": [
+                "ecs/*"
+            ],
+            "@components/*": [
+                "components/*"
+            ],
+            "@systems/*": [
+                "systems/*"
+            ],
+            "@models/*": [
+                "models/*"
+            ],
+            "@ui/*": [
+                "ui/*"
+            ],
+            "@data/*": [
+                "data/*"
+            ],
+            "@utils/*": [
+                "utils/*"
+            ]
+        },
+        "esModuleInterop": true, // Recommended for better interop with CommonJS modules
+        "forceConsistentCasingInFileNames": true, // Good practice
+        "resolveJsonModule": true, // If you import JSON files
+        "allowJs": true, // Allow JavaScript files to be compiled
+        "checkJs": false, // Do not check JavaScript files
+        // Consider these for cleaner output and explicit extension control
+        "emitDeclarationOnly": false, // Set to true if you only want .d.ts files
+        "importHelpers": true, // Use tslib for helpers
+        "importsNotUsedAsValues": "remove"
+    },
+    "include": [
+        "src",
+        "scripts"
+    ],
+    "ts-node": {
+        "esm": true, // Tells ts-node to run in ESM mode
+        // This is the key: Tell ts-node to load tsconfig-paths/register before processing
+        "require": [
+            "tsconfig-paths/register",
+        ],
+        // This tells ts-node how to resolve modules; "NodeNext" is often best for modern Node.js
+        "module": "NodeNext",
+        // "experimentalSpecifierResolution": "node" // Helps with path resolution
     }
-  },
-  "include": ["src"]
 }

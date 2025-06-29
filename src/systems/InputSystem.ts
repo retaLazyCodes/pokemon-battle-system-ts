@@ -1,6 +1,27 @@
 import { EventBus } from '@core/EventBus';
 import { System } from '@ecs/System';
 
+/**
+ * InputSystem
+ * --------------------------------------------------------------------------
+ * This system listens for player inputs from the UI.
+ * Its only responsibility is to capture user interactions
+ * (such as clicks on attack or switch buttons) and emit
+ * high-level actions through the EventBus.
+ * 
+ * It should NOT contain any battle state logic like attackerId or targetId.
+ * The current battle state is handled by BattleSystem.
+ *
+ * Responsibilities:
+ * - Listen to DOM events (clicks on buttons).
+ * - Emit player actions like "attack" or "switch" with minimal payload.
+ * - Do NOT store any state about which Pokémon is active.
+ *
+ * Emits:
+ * - `playerAction` event: { type: 'attack', moveIndex: number }
+ * - `playerAction` event: { type: 'switch', pokemonId: number }
+*/
+
 export class InputSystem extends System {
     private eventBus: EventBus;
 
@@ -33,8 +54,8 @@ export class InputSystem extends System {
             console.log(`🎯 InputSystem: Attack selected -> ${moveId}`);
             this.eventBus.emit('playerAction', {
                 type: 'attack',
-                moveId
-            });
+                moveIndex: moveId
+            }); 
         }
     };
 

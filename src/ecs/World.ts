@@ -39,6 +39,20 @@ export class World {
         return storage;
     }
 
+    getEntityBattleData (entityId: number) {
+        const entity = this.entityManager.getEntity(entityId);
+        const name = this.storages.get('Name')?.get(entity)?.name ?? 'Unknown';
+        const health = this.storages.get('Health')?.get(entity)?.current ?? 0;
+        const moves = this.storages.get('Move')?.get(entity)?.moves ?? [];
+
+        return {
+            id: entity.id,
+            name,
+            health,
+            moves
+        };
+    }
+      
     clear() {
         this.entityManager.clear();
         this.storages.forEach(storage => storage.clear());
