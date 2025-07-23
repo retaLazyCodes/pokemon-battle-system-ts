@@ -5,6 +5,30 @@ import { BattleSystem } from '@systems/BattleSystem';
 import { InputSystem } from "@systems/InputSystem";
 import { DamageSystem } from '@systems/DamageSystem';
 
+/**
+ * Engine is responsible for initializing and managing the core systems of the game.
+ * It sets up the required systems and allows starting or stopping them as needed.
+ * 
+ *
+ * Responsibilities:
+ * - Registers core game systems (Input, Battle, Damage) during initialization.
+ * - Cleans up all systems when stopping the game.
+ * - Acts as the entry point for system orchestration.
+ *
+ * Dependencies:
+ * - `EventBus`: Enables decoupled communication between systems and UI components.
+ * - `World`: Represents all game entities and their components.
+ * - `SystemManager`: Handles system registration and lifecycle.
+ *
+ * Methods:
+ * - `start()`: Registers all necessary systems and logs the setup.
+ * - `stop()`: Unregisters all systems and logs the shutdown.
+ *
+ * Notes:
+ * - There is no main game loop; instead, systems react to dispatched events such as user input.
+ * - This class is typically called from a higher-level `Game.ts` controller.
+ */
+
 export class Engine {
     private eventBus: EventBus;
     private world: World;
