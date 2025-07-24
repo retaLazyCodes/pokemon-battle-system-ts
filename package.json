@@ -10,9 +10,13 @@
     "test-battle": "node --experimental-specifier-resolution=node --loader ./loader.js scripts/test-battle.ts"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.4",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "~5.7.2",
-    "vite": "^6.3.1"
+    "vite": "^5.4.19"
+  },
+  "dependencies": {
+    "vue": "^3.5.18"
   }
 }

@@ -1,6 +1,4 @@
-import { Game } from '@core/Game';
+import { createApp } from 'vue'
+import GameRoot from '@ui/GameRoot.vue'
 
-window.onload = () => {
-    const game = new Game();
-    game.start();
-};
+createApp(GameRoot).mount('#app')

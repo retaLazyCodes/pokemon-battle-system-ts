@@ -42,12 +42,12 @@ export class Game {
         loadBattle(this.world); // ← acá se cargan las entidades y componentes
         this.engine.start();    // ← se registran los sistemas
 
-        this.battleUI.render();
-        this.battleUI.listenToUI();
+        // this.battleUI.render();
+        // this.battleUI.listenToUI();
 
-        this.eventBus.on('stateChanged', () => {
-            this.battleUI.render();
-        });
+        // this.eventBus.on('stateChanged', () => {
+        //     this.battleUI.render();
+        // });
     }
 
     stop() {
