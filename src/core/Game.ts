@@ -2,7 +2,8 @@ import { Engine } from '@core/Engine';
 import { EventBus } from '@core/EventBus';
 import { World } from '@ecs/World';
 import { BattleUI } from '@ui/BattleUI';
-import { loadBattle } from "../scenes/loadBattle";
+import { loadBattle } from "@scenes/loadBattle";
+import { PokemonDetails } from '@services/pokemonApi';
 
 /**
  * Game serves as the high-level entry point and coordinator of the entire battle simulation.
@@ -37,9 +38,9 @@ export class Game {
         this.battleUI = new BattleUI(this.world, this.eventBus);
     }
 
-    start() {
+    start(pokemons: PokemonDetails[]) {
         console.log('🎮 Starting Pokémon Battle Simulator...');
-        loadBattle(this.world); // ← acá se cargan las entidades y componentes
+        loadBattle(this.world, pokemons); // ← acá se cargan las entidades y componentes
         this.engine.start();    // ← se registran los sistemas
 
         // this.battleUI.render();

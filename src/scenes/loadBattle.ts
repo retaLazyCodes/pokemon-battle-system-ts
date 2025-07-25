@@ -3,8 +3,9 @@ import { ComponentStorage } from '@ecs/ComponentStorage';
 import { NameComponent } from '@components/NameComponent';
 import { HealthComponent } from '@components/HealthComponent';
 import { MoveComponent, MoveCategory } from '@components/MoveComponent';
+import { PokemonDetails, PokemonMove } from '@services/pokemonApi';
 
-export function loadBattle(world: World) {
+export function loadBattle(world: World, pokemons: PokemonDetails[]) {
     const names = new ComponentStorage<NameComponent>();
     const healths = new ComponentStorage<HealthComponent>();
     const moves = new ComponentStorage<MoveComponent>();
@@ -13,15 +14,22 @@ export function loadBattle(world: World) {
     world.addComponentStorage('Health', healths);
     world.addComponentStorage('Move', moves);
 
-    const pikachu = world.entityManager.createEntity();
-    names.add(pikachu, new NameComponent('Pikachu'));
-    healths.add(pikachu, new HealthComponent(50, 50));
-    moves.add(pikachu, new MoveComponent([{ name: 'Impactrueno', power: 40, id: 'impactrueno', accuracy: 100, type: 'Electric', category: MoveCategory.SPECIAL }]));
-
-    const bulbasaur = world.entityManager.createEntity();
-    names.add(bulbasaur, new NameComponent('Bulbasaur'));
-    healths.add(bulbasaur, new HealthComponent(45, 45));
-    moves.add(bulbasaur, new MoveComponent([{ name: 'Látigo Cepa', power: 45, id: 'latigo-cepa', accuracy: 100, type: 'Grass', category: MoveCategory.PHYSICAL }]));
+    pokemons.forEach(pokemon => {
+        console.log(pokemon)
+        const entity = world.entityManager.createEntity();
+        names.add(entity, new NameComponent(pokemon.name));
+        healths.add(entity, new HealthComponent(pokemon.stats.hp, pokemon.stats.hp));
+        moves.add(entity, new MoveComponent(
+            pokemon.moves.map((m: PokemonMove) => ({
+                id: m.id,
+                name: m.name,
+                power: m.power,
+                accuracy: m.accuracy,
+                type: m.type,
+                category: m.category as MoveCategory
+            }))
+        ));
+    });
 
     console.log('⚔️ Combate cargado con:');
     for (const [id, name] of names.entries()) {

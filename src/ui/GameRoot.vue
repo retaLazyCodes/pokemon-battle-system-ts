@@ -2,18 +2,32 @@
 import { ref, onMounted } from 'vue'
 import { Game } from '../core/Game'
 import BattleScreen from './BattleScreen.vue'
+import { PokemonAPI, PokemonDetails } from '../services/pokemonApi'
 
 let game: Game
+const loading = ref(true)
+const pokemon1 = ref<PokemonDetails | null>(null)
+const pokemon2 = ref<PokemonDetails | null>(null)
 
-onMounted(() => {
-  game = new Game()
-  game.start()
+onMounted(async () => {
+  pokemon1.value = await PokemonAPI.getRandomPokemon()
+  pokemon2.value = await PokemonAPI.getRandomPokemon()
+  loading.value = false
+  if (pokemon1 && pokemon2) {
+    game = new Game()
+    game.start([pokemon1.value, pokemon2.value])
+  }
 })
 
 </script>
 
 <template>
   <div>
-    <BattleScreen />
+    <div v-if="loading">Loading Pokémon...</div>
+    <BattleScreen
+      v-else
+      :playerSprite="pokemon1?.images.back"
+      :enemySprite="pokemon2?.images.front"
+    />
   </div>
 </template>

@@ -1,9 +1,9 @@
 import { Component } from '@ecs/Component';
 
 export enum MoveCategory {
-    PHYSICAL = 'PHYSICAL',
-    SPECIAL = 'SPECIAL',
-    STATUS = 'STATUS'
+    PHYSICAL = 'physical',
+    SPECIAL = 'special',
+    STATUS = 'status'
 }
 
 export interface Move {

@@ -1,14 +1,17 @@
 <script setup lang="ts">
-// Solo lógica de UI, props, emits, etc.
+import BattleSprites from './BattleSprites.vue'
+
+const props = defineProps<{
+  playerSprite: string
+  enemySprite: string
+  background?: string
+}>()
 </script>
 
 <template>
-  <div class="battle-screen">
-    <h1>Pokémon Battle Simulator</h1>
-    <button>Botón de prueba</button>
-  </div>
+  <BattleSprites
+    :playerSprite="props.playerSprite"
+    :enemySprite="props.enemySprite"
+    :background="props.background"
+  />
 </template>
-
-<style scoped>
-
-</style>
