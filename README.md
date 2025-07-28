@@ -1,120 +1,139 @@
-# 📄 ECS Pokémon Battle Simulator
+# 🎮 Pokémon Battle System
 
-This project is a turn-based combat game inspired by Pokémon, developed in TypeScript. It follows an Entity-Component-System (ECS) architecture combined with an Observer / PubSub pattern (EventBus) to decouple game logic from the user interface.
+Un simulador de combate Pokémon desarrollado con **TypeScript** y **Vue 3**, implementando una arquitectura **ECS (Entity Component System)** para una gestión eficiente del estado del juego.
 
-## 🧬 ECS Entity & Component Model
+## 🚀 Características
 
-### 🧩 Entities and Their Components
+- **Sistema ECS**: Arquitectura modular para entidades, componentes y sistemas
+- **Event-Driven**: Sistema de eventos para comunicación entre componentes
+- **Vue 3 + TypeScript**: Interfaz moderna con tipado fuerte
+- **Arquitectura Modular**: Separación clara entre lógica de juego, UI y servicios
 
-| Entity     | Description                   | Common Components                                        |
-|------------|-------------------------------|----------------------------------------------------------|
-| `Pokemon`  | Combat creature               | `Name`, `Health`, `Stats`, `Moves`, `Status`, `Sprite`  |
-| `Player`   | Human trainer                 | `Trainer`, `Team`, `Input`                               |
-| `Enemy`    | AI-controlled trainer         | `Trainer`, `Team`, `AI`                                  |
-| `Battle`   | Current battle state/context  | `TurnOrder`, `Phase`, `BattleLog`                        |
+## 📁 Estructura del Proyecto
 
----
+```
+src/
+├── game/                   # Lógica del juego
+│   ├── ecs/               # Sistema ECS base (Component, Entity, World, etc.)
+│   ├── components/        # Componentes ECS específicos del juego (Health, Name, Move, etc.)
+│   ├── systems/           # Sistemas ECS (Battle, Damage, Input, etc.)
+│   ├── scenes/            # Escenas del juego
+│   ├── mock/              # Datos de prueba (mocks)
+│   ├── core/              # Core del juego (Game, Engine, EventBus)
+│   ├── data/              
+│   └── types/             
+├── ui/                     # Lógica del UI
+│   ├── App.vue            # Componente raíz de la aplicación
+│   ├── components/        # Componentes Vue
+│   ├── core/              
+│   ├── composables/       
+│   ├── types/             
+│   └── data/              
+├── shared/                 # Código compartido
+│   ├── services/          # Servicios (API, etc.)
+│   ├── utils/             
+│   └── types/             
+└── main.ts                 # Entrypoint de la app
+```
 
-### 🧱 Component Descriptions
+## 🏗️ Arquitectura
 
-| Component     | Purpose                                  | Example Properties                                       |
-|---------------|------------------------------------------|----------------------------------------------------------|
-| `Name`        | Pokémon's display name                   | `name: string`                                           |
-| `Health`      | Tracks HP                                | `current: number`, `max: number`                         |
-| `Stats`       | Battle stats                             | `attack`, `defense`, `speed`, etc.                       |
-| `Moves`       | List of known moves                      | `moves: Move[]`                                          |
-| `Status`      | Condition (e.g., paralysis, burn)        | `condition: string`, `turnsLeft: number`                 |
-| `Sprite`      | Visual representation                    | `url: string`                                            |
-| `Trainer`     | Player or enemy meta-info                | `name: string`, `activePokemonId: number`                |
-| `Team`        | List of Pokémon in party                 | `pokemonIds: number[]`                                   |
-| `TeamRef`     | Links Pokémon to trainer                 | `ownerId: number`                                        |
-| `Input`       | Marks player-controlled trainer          | `enabled: boolean`                                       |
-| `AI`          | Strategy logic for automated enemies     | `strategy: string`                                       |
-| `TurnOrder`   | Turn queue                               | `current: number`, `queue: number[]`                     |
-| `Phase`       | Current phase of the turn                | `value: INPUT \| 'EXECUTION' \| 'RESOLVE' \| 'END'`      |
-| `BattleLog`   | Battle text history                      | `entries: string[]`                                      |
+### ECS (Entity Component System)
 
----
+El proyecto utiliza una arquitectura ECS que separa:
 
-## ⚙️ Systems Overview
+- **Entities**: Objetos del juego (Pokémon)
+- **Components**: Datos puros (salud, nombre, movimientos)
+- **Systems**: Lógica que procesa componentes
 
-- `InputSystem`: Listens for user clicks and emits gameplay actions.
-- `BattleSystem`: Coordinates the execution of each battle turn.
-- `DamageSystem`: Calculates and applies damage, factoring in effectiveness.
-- `StatusSystem`: Applies status effects (e.g., paralysis, poison, stat drops).
-- `UIUpdateSystem`: Updates the health bars, action log, and other UI elements.
-- `TurnSystem`: Controls the phase transitions of a turn (Input → Execute → Resolve → End).
+### Event-Driven Architecture
 
----
+- **EventBus**: Sistema central de eventos
+- **Loose Coupling**: Componentes se comunican vía eventos
+- **Reactive Updates**: UI se actualiza automáticamente
 
-## 🧱 Relationships Between Core Elements
+### Separación de Responsabilidades
 
-### World
-- Central hub of the ECS architecture.
-- Manages:
-  - `EntityManager`: Generates and deletes entities (IDs).
-  - `ComponentStorage<T>`: Holds all component data by type.
-- Provides access to component storage for systems.
+- **Game**: Lógica de negocio del juego
+- **UI**: Presentación y interacción
+- **Shared**: Servicios y utilidades compartidas
 
-### Entity
-- An entity is just a numeric ID.
-- Has no internal logic or structure.
-- Composed entirely of components.
+## 🛠️ Tecnologías
 
-### Component
-- Pure data structures, no logic.
-- Represent state or attributes of an entity.
-- Examples: `Health`, `Name`, `Moves`, `Status`, `Sprite`.
+- **TypeScript**: Tipado estático
+- **Vue 3**: Framework de UI
+- **Vite**: Build tool y dev server
 
-### System
-- Contains game logic (e.g., damage calculation, input handling).
-- Subscribes to events via `EventBus`.
-- Reads/modifies entity components via `World`.
+## 🚀 Instalación
 
-### EventBus
-- Pub/Sub system used for decoupled communication.
-- Emits and listens to events asynchronously.
-- Used by systems and UI.
+```bash
+# Clonar el repositorio
+git clone https://github.com/retaLazyCodes/pokemon-battle-system-ts
+cd pokemon-battle-system-ts
 
-### SystemManager
-- Manages registration and lifecycle of systems.
+# Instalar dependencias
+npm install
 
----
+# Ejecutar en modo desarrollo
+npm run dev
+```
 
-## 🔄 Data Flow – A Full Turn Breakdown
+## 📖 Uso
 
-### Step-by-step
+### Frontend (Este repositorio)
+1. **Iniciar el servidor**: `npm run dev`
+2. **Abrir navegador**: `http://localhost:5173`
+3. **Ver la batalla**: La aplicación cargará automáticamente una batalla de prueba
 
-1. **Player input**
-   - Clicks an attack button.
-   - `InputSystem` captures DOM event and emits:
-     ```ts
-     eventBus.emit('playerAction', { type: 'attack', moveId })
-     ```
+### Backend (API Proxy)
+Este proyecto consume datos de una API Rest que actúa como proxy de la PokéAPI:
 
-2. **Battle execution**
-   - `BattleSystem` receives `playerAction`.
-   - Reads attacker and target components.
-   - Calculates damage and emits:
-     ```ts
-     eventBus.emit('damageApplied', { targetId, damage })
-     ```
+- **Repositorio**: [pokemon-battle-system-server](https://github.com/retaLazyCodes/pokemon-battle-system-server)
+- **Funcionalidad**: Scrapea datos de PokeAPI y los almacena en SQLite
+- **Ventajas**: Evita límites de uso y bans de la API pública
+- **Endpoints**: Expone endpoints simples para consumir desde el frontend
 
-3. **Damage resolution**
-   - `DamageSystem` listens to `damageApplied`.
-   - Updates `Health` component of target.
-   - If HP <= 0:
-     ```ts
-     eventBus.emit('pokemonFainted', { entityId })
-     ```
+## 🔧 Scripts Disponibles
 
-4. **Apply secondary effects**
-   - `BattleSystem` emits:
-     ```ts
-     eventBus.emit('secondaryEffects', move.effects)
-     ```
-   - `StatusSystem`, `StatSystem` process them.
+```bash
+npm run dev          # Servidor de desarrollo
+npm run build        # Build de producción
+npm run preview      # Preview del build
+```
 
-5. **UI update**
-   - Events like `logUpdate`, `healthChanged` are emitted.
-   - `UIUpdateSystem` listens and updates the view.
+## 🔄 Flujo de Datos
+
+1. **Inicialización**: `Game` carga entidades y componentes
+2. **Sistemas**: Procesan componentes y emiten eventos
+3. **EventBus**: Distribuye eventos a componentes
+4. **UI**: Reacciona a eventos y actualiza vista
+
+## 🎨 Path Mappings
+
+El proyecto usa alias para importaciones limpias:
+
+```typescript
+// Game
+import { EventBus } from '@game/core/EventBus'
+import { World } from '@game/ecs/World'
+import { HealthComponent } from '@game/components/HealthComponent'
+
+// UI
+import BattleView from '@ui/components/BattleView.vue'
+import { BattleUI } from '@ui/core/BattleUI'
+
+// Shared
+import { PokemonDetails } from '@shared/services/pokemonApi'
+```
+
+## 🤝 Contribuir
+
+1. Forkeá el proyecto
+2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir un Pull Request
+
+## 📝 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
