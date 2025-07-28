@@ -1,9 +1,9 @@
-import { World } from '@ecs/World';
-import { ComponentStorage } from '@ecs/ComponentStorage';
-import { NameComponent } from '@components/NameComponent';
-import { HealthComponent } from '@components/HealthComponent';
-import { MoveComponent, MoveCategory } from '@components/MoveComponent';
-import { PokemonDetails, PokemonMove } from '@services/pokemonApi';
+import { World } from '@game/ecs/World';
+import { ComponentStorage } from '@game/ecs/ComponentStorage';
+import { NameComponent } from '@game/components/NameComponent';
+import { HealthComponent } from '@game/components/HealthComponent';
+import { MoveComponent, MoveCategory } from '@game/components/MoveComponent';
+import { PokemonDetails, PokemonMove } from '@shared/services/pokemonApi';
 
 export function loadBattle(world: World, pokemons: PokemonDetails[]) {
     const names = new ComponentStorage<NameComponent>();

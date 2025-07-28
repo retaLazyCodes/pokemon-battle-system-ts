@@ -1,4 +1,4 @@
 import { createApp } from 'vue'
-import GameRoot from '@ui/GameRoot.vue'
+import App from '@ui/App.vue'
 
-createApp(GameRoot).mount('#app')
+createApp(App).mount('#app')

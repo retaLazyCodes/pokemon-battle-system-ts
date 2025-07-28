@@ -1,8 +1,8 @@
-import { EventBus } from "@core/EventBus";
-import { World } from "@ecs/World";
-import { Entity } from "@ecs/Entity";
-import { HealthComponent } from "@components/HealthComponent";
-import { NameComponent } from "@components/NameComponent";
+import { EventBus } from "@game/core/EventBus";
+import { World } from "@game/ecs/World";
+import { Entity } from "@game/ecs/Entity";
+import { HealthComponent } from "@game/components/HealthComponent";
+import { NameComponent } from "@game/components/NameComponent";
 
 export class BattleUI {
     constructor(private world: World, private eventBus: EventBus) { }

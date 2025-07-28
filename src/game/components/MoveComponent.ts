@@ -1,4 +1,4 @@
-import { Component } from '@ecs/Component';
+import { Component } from '@game/ecs/Component';
 
 export enum MoveCategory {
     PHYSICAL = 'physical',

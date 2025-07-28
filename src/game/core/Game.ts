@@ -1,9 +1,9 @@
-import { Engine } from '@core/Engine';
-import { EventBus } from '@core/EventBus';
-import { World } from '@ecs/World';
-import { BattleUI } from '@ui/BattleUI';
-import { loadBattle } from "@scenes/loadBattle";
-import { PokemonDetails } from '@services/pokemonApi';
+import { Engine } from '@game/core/Engine';
+import { EventBus } from '@game/core/EventBus';
+import { World } from '@game/ecs/World';
+import { BattleUI } from '@ui/core/BattleUI';
+import { loadBattle } from "@game/scenes/loadBattle";
+import { PokemonDetails } from '@shared/services/pokemonApi';
 
 /**
  * Game serves as the high-level entry point and coordinator of the entire battle simulation.

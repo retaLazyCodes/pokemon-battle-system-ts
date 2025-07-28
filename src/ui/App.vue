@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { Game } from '../core/Game'
-import BattleScreen from './BattleScreen.vue'
-import { PokemonAPI, PokemonDetails } from '../services/pokemonApi'
+import { Game } from '@game/core/Game'
+import BattleScreen from '@ui/components/BattleScreen.vue'
+import { PokemonAPI, PokemonDetails } from '@shared/services/pokemonApi'
 
 let game: Game
 const loading = ref(true)

@@ -1,9 +1,9 @@
-import { EventBus } from '@core/EventBus';
-import { SystemManager } from '@ecs/SystemManager';
-import { World } from '@ecs/World';
-import { BattleSystem } from '@systems/BattleSystem';
-import { InputSystem } from "@systems/InputSystem";
-import { DamageSystem } from '@systems/DamageSystem';
+import { EventBus } from '@game/core/EventBus';
+import { SystemManager } from '@game/ecs/SystemManager';
+import { World } from '@game/ecs/World';
+import { BattleSystem } from '@game/systems/BattleSystem';
+import { InputSystem } from "@game/systems/InputSystem";
+import { DamageSystem } from '@game/systems/DamageSystem';
 
 /**
  * Engine is responsible for initializing and managing the core systems of the game.

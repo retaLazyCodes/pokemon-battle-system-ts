@@ -6,16 +6,23 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@core': path.resolve(__dirname, './src/core'),
-      '@ecs': path.resolve(__dirname, './src/ecs'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@systems': path.resolve(__dirname, './src/systems'),
-      '@models': path.resolve(__dirname, './src/models'),
+      '@game/core': path.resolve(__dirname, './src/game/core'),
+      '@game/ecs': path.resolve(__dirname, './src/game/ecs'),
+      '@game/components': path.resolve(__dirname, './src/game/components'),
+      '@game/systems': path.resolve(__dirname, './src/game/systems'),
+      '@game/scenes': path.resolve(__dirname, './src/game/scenes'),
+      '@game/mock': path.resolve(__dirname, './src/game/mock'),
+      '@game/data': path.resolve(__dirname, './src/game/data'),
+      '@game/types': path.resolve(__dirname, './src/game/types'),
       '@ui': path.resolve(__dirname, './src/ui'),
-      '@data': path.resolve(__dirname, './src/data'),
-      '@utils': path.resolve(__dirname, './src/utils'),
-      '@services': path.resolve(__dirname, './src/services'),
-      '@scenes': path.resolve(__dirname, './src/scenes')
+      '@ui/components': path.resolve(__dirname, './src/ui/components'),
+      '@ui/composables': path.resolve(__dirname, './src/ui/composables'),
+      '@ui/types': path.resolve(__dirname, './src/ui/types'),
+      '@ui/data': path.resolve(__dirname, './src/ui/data'),
+      '@ui/core': path.resolve(__dirname, './src/ui/core'),
+      '@shared/services': path.resolve(__dirname, './src/shared/services'),
+      '@shared/utils': path.resolve(__dirname, './src/shared/utils'),
+      '@shared/types': path.resolve(__dirname, './src/shared/types')
     }
   }
 });

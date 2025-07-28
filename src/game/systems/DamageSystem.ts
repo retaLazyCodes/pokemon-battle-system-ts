@@ -1,9 +1,9 @@
-import { EventBus } from '@core/EventBus';
-import { System } from '@ecs/System';
-import { World } from '@ecs/World';
-import { Entity } from '@ecs/Entity';
-import { HealthComponent } from '@components/HealthComponent';
-import { NameComponent } from '@components/NameComponent';
+import { EventBus } from '@game/core/EventBus';
+import { System } from '@game/ecs/System';
+import { World } from '@game/ecs/World';
+import { Entity } from '@game/ecs/Entity';
+import { HealthComponent } from '@game/components/HealthComponent';
+import { NameComponent } from '@game/components/NameComponent';
 
 
 /**

@@ -1,4 +1,4 @@
-import { EventBus } from '@core/EventBus';
+import { EventBus } from '@game/core/EventBus';
 import { System } from './System';
 
 /**

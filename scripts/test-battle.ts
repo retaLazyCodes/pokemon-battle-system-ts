@@ -1,14 +1,14 @@
-import { EventBus } from '../src/core/EventBus';
-import { World } from '../src/ecs/World';
-import { ComponentStorage } from '../src/ecs/ComponentStorage';
-import { SystemManager } from '../src/ecs/SystemManager';
-import { BattleSystem } from '../src/systems/BattleSystem';
-import { DamageSystem } from '../src/systems/DamageSystem';
+import { EventBus } from '@game/core/EventBus';
+import { World } from '@game/ecs/World';
+import { ComponentStorage } from '@game/ecs/ComponentStorage';
+import { SystemManager } from '@game/ecs/SystemManager';
+import { BattleSystem } from '@game/systems/BattleSystem';
+import { DamageSystem } from '@game/systems/DamageSystem';
 
-import { NameComponent } from '../src/components/NameComponent';
-import { HealthComponent } from '../src/components/HealthComponent';
-import { MoveComponent } from '../src/components/MoveComponent';
-import { mockEntities } from '../src/mock/mockEntities';
+import { NameComponent } from '@game/components/NameComponent';
+import { HealthComponent } from '@game/components/HealthComponent';
+import { MoveComponent } from '@game/components/MoveComponent';
+import { mockEntities } from '@game/mock/mockEntities';
 
 
 // Setup

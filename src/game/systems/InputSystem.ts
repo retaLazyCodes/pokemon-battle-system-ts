@@ -1,5 +1,5 @@
-import { EventBus } from '@core/EventBus';
-import { System } from '@ecs/System';
+import { EventBus } from '@game/core/EventBus';
+import { System } from '@game/ecs/System';
 
 /**
  * InputSystem

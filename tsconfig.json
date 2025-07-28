@@ -25,29 +25,56 @@
         /* Alias */
         "baseUrl": "./src",
         "paths": {
-            "@core/*": [
-                "core/*"
+            "@game/core/*": [
+                "game/core/*"
             ],
-            "@ecs/*": [
-                "ecs/*"
+            "@game/ecs/*": [
+                "game/ecs/*"
             ],
-            "@components/*": [
-                "components/*"
+            "@game/components/*": [
+                "game/components/*"
             ],
-            "@systems/*": [
-                "systems/*"
+            "@game/systems/*": [
+                "game/systems/*"
             ],
-            "@models/*": [
-                "models/*"
+            "@game/scenes/*": [
+                "game/scenes/*"
+            ],
+            "@game/mock/*": [
+                "game/mock/*"
+            ],
+            "@game/data/*": [
+                "game/data/*"
+            ],
+            "@game/types/*": [
+                "game/types/*"
             ],
             "@ui/*": [
                 "ui/*"
             ],
-            "@data/*": [
-                "data/*"
+            "@ui/components/*": [
+                "ui/components/*"
             ],
-            "@utils/*": [
-                "utils/*"
+            "@ui/composables/*": [
+                "ui/composables/*"
+            ],
+            "@ui/types/*": [
+                "ui/types/*"
+            ],
+            "@ui/data/*": [
+                "ui/data/*"
+            ],
+            "@ui/core/*": [
+                "ui/core/*"
+            ],
+            "@shared/services/*": [
+                "shared/services/*"
+            ],
+            "@shared/utils/*": [
+                "shared/utils/*"
+            ],
+            "@shared/types/*": [
+                "shared/types/*"
             ]
         },
         "esModuleInterop": true, // Recommended for better interop with CommonJS modules

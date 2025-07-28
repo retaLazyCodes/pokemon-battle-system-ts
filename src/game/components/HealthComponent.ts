@@ -1,4 +1,4 @@
-import { Component } from '@ecs/Component';
+import { Component } from '@game/ecs/Component';
 
 export class HealthComponent implements Component {
     constructor(private _current: number, public max: number) { }

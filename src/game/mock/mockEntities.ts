@@ -1,7 +1,7 @@
-import { World } from '@ecs/World';
-import { NameComponent } from '@components/NameComponent';
-import { HealthComponent } from '@components/HealthComponent';
-import { MoveComponent, MoveCategory, Move } from '@components/MoveComponent';
+import { World } from '@game/ecs/World';
+import { NameComponent } from '@game/components/NameComponent';
+import { HealthComponent } from '@game/components/HealthComponent';
+import { MoveComponent, MoveCategory, Move } from '@game/components/MoveComponent';
 
 export function mockEntities (world: World) {
     const pikachu = world.entityManager.createEntity();

@@ -1,8 +1,8 @@
-import { EventBus } from '@core/EventBus';
-import { World } from '@ecs/World';
-import { System } from '@ecs/System';
-import { MoveComponent } from '@components/MoveComponent';
-import { NameComponent } from '@components/NameComponent';
+import { EventBus } from '@game/core/EventBus';
+import { World } from '@game/ecs/World';
+import { System } from '@game/ecs/System';
+import { MoveComponent } from '@game/components/MoveComponent';
+import { NameComponent } from '@game/components/NameComponent';
 
 /**
  * BattleSystem
