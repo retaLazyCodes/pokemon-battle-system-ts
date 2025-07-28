@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { Game } from '@game/core/Game'
-import BattleScreen from '@ui/components/BattleScreen.vue'
+import BattleView from './components/BattleView.vue'
 import { PokemonAPI, PokemonDetails } from '@shared/services/pokemonApi'
 
 let game: Game
@@ -24,7 +24,7 @@ onMounted(async () => {
 <template>
   <div>
     <div v-if="loading">Loading Pokémon...</div>
-    <BattleScreen
+    <BattleView
       v-else
       :playerSprite="pokemon1?.images.back"
       :enemySprite="pokemon2?.images.front"

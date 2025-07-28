@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BattleSprites from './BattleSprites.vue'
+import BattleScene from './BattleScene.vue'
 
 const props = defineProps<{
   playerSprite: string
@@ -9,7 +9,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <BattleSprites
+  <BattleScene
     :playerSprite="props.playerSprite"
     :enemySprite="props.enemySprite"
     :background="props.background"
