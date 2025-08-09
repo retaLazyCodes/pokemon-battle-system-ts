@@ -28,6 +28,8 @@ onMounted(async () => {
       v-else
       :playerSprite="pokemon1?.images.back"
       :enemySprite="pokemon2?.images.front"
+      :playerName="pokemon1?.name"
+      :enemyName="pokemon2?.name"
     />
   </div>
 </template>
