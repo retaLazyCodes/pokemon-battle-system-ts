@@ -13,6 +13,7 @@ export interface PokemonMove {
     category: string;
     power: number;
     type: string;
+    accuracy: number;
 }
 
 export interface PokemonImages {
