@@ -47,9 +47,11 @@ function onMoveMouseLeave() {
         @mouseenter="onMoveMouseEnter($event, move)"
         @mouseleave="onMoveMouseLeave"
       >
-        <div class="move-name">{{ titleCase(move.name) }}</div>
-        <div class="move-type">{{ move.type.toUpperCase() }}</div>
-        <div class="move-pp">16/16</div>
+        <div class="move-content">
+          <div class="move-name">{{ titleCase(move.name) }}</div>
+          <div class="move-type">{{ move.type.toUpperCase() }}</div>
+          <div class="move-pp">16/16</div>
+        </div>
       </button>
     </div>
 
@@ -118,6 +120,7 @@ function onMoveMouseLeave() {
 }
 
 .attack-btn {
+    position: relative;
     flex: 1;
     padding: 12px;
     font-size: 1em;
@@ -135,20 +138,39 @@ function onMoveMouseLeave() {
 
 @media (max-width: 768px) {
     .attack-btn {
-        font-size: .5em;
+        font-size: .7em;
         padding: 6px 2px;
     }
 }
 
+.move-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .move-name {
-    font-size: 0.7em;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .move-type {
+    position: absolute;
+    left: 6px;
+    bottom: 1px;
     font-size: 0.6em;
 }
 
 .move-pp {
+    position: absolute;
+    right: 6px;
+    bottom: 1px;
     font-size: 0.55em;
 }
 
