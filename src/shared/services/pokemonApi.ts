@@ -9,11 +9,13 @@ export interface PokemonStats {
 }
 
 export interface PokemonMove {
+    id: string;
     name: string;
     category: string;
     power: number;
     type: string;
     accuracy: number;
+    index: number;
 }
 
 export interface PokemonImages {
@@ -92,7 +94,7 @@ export class PokemonAPI {
 
     private static async getPokemonMoves(data: any, pokemonTypes: string[]): Promise<PokemonMove[]> {
         const moves: PokemonMove[] = await Promise.all(
-            data.moves.map(async (move: any) => {
+            data.moves.map(async (move: any, index: number) => {
                 const moveResponse = await fetch(move.move.url);
                 const moveData = await moveResponse.json();
                 return {
@@ -101,7 +103,8 @@ export class PokemonAPI {
                     accuracy: moveData.accuracy,
                     category: moveData.damage_class.name,
                     power: moveData.power || 0,
-                    type: moveData.type.name
+                    type: moveData.type.name,
+                    index: index
                 };
             })
         );

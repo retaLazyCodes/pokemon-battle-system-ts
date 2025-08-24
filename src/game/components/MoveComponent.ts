@@ -13,6 +13,7 @@ export interface Move {
     accuracy: number;
     type: string;
     category: MoveCategory;
+    index: number;
 }
 
 export class MoveComponent implements Component {

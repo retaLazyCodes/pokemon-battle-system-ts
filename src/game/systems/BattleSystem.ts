@@ -1,8 +1,7 @@
 import { EventBus } from '@game/core/EventBus';
 import { World } from '@game/ecs/World';
 import { System } from '@game/ecs/System';
-import { MoveComponent } from '@game/components/MoveComponent';
-import { NameComponent } from '@game/components/NameComponent';
+import { PokemonUtils } from '@shared/utils/pokemonUtils';
 
 /**
  * BattleSystem
@@ -59,31 +58,27 @@ export class BattleSystem extends System {
 
     private onPlayerAction (action: PlayerActionPayload) {
         if (action.type === 'attack' && action.moveIndex !== undefined) {
-            const attacker = this.world.entityManager.getEntity(this.activeAttackerId);
-            const target = this.world.entityManager.getEntity(this.activeDefenderId);
+            const attacker = this.world.getEntityBattleData(this.activeAttackerId);
+            const target = this.world.getEntityBattleData(this.activeDefenderId)
 
-            const moveStorage = this.world.getStorage<MoveComponent>('Move');
-            const nameStorage = this.world.getStorage<NameComponent>('Name');
-
-            const move = moveStorage.get(attacker)?.getMoveAt(action.moveIndex);
+            const move = attacker.moves[action.moveIndex];
 
             if (!move) {
                 console.warn('❌ Move not found for attacker:', attacker.id);
                 return;
             }
 
-            const attackerName = nameStorage.get(attacker)?.name ?? `Entity#${attacker.id}`;
-            const targetName = nameStorage.get(target)?.name ?? `Entity#${target.id}`;
+            console.log(`⚔️ ${attacker.name} used ${move.name} on ${target.name}!`);
 
-            console.log(`⚔️ ${attackerName} used ${move.name} on ${targetName}!`);
+            const damage: number = PokemonUtils.calculateDamage(attacker.stats, target, move, false)
 
             this.eventBus.emit('damageApplied', {
                 targetId: target.id,
-                damage: move.power
+                damage
             });
 
             this.eventBus.emit('turnProcessed', {
-                result: `${attackerName} used ${move.name} on ${targetName}!`
+                result: `${attacker.name} used ${move.name} on ${target.name}!`
             });
 
             // 🔄 Cambiar roles después del turno

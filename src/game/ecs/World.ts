@@ -44,11 +44,13 @@ export class World {
         const name = this.storages.get('Name')?.get(entity)?.name ?? 'Unknown';
         const health = this.storages.get('Health')?.get(entity)?.current ?? 0;
         const moves = this.storages.get('Move')?.get(entity)?.moves ?? [];
+        const stats = this.storages.get('Stats')?.get(entity)?.stats ?? {};
 
         return {
             id: entity.id,
             name,
             health,
+            stats,
             moves
         };
     }

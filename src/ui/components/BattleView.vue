@@ -24,16 +24,18 @@ const playerMoves = props.world.getStorage('Move').get(props.playerEntity)?.move
 const playerSprite = props.world.getStorage('Sprite').get(props.playerEntity)?.backSprite ?? ''
 const playerIcon = props.world.getStorage('Sprite').get(props.playerEntity)?.iconSprite ?? ''
 const enemySprite = props.world.getStorage('Sprite').get(props.enemyEntity)?.frontSprite ?? ''
+const playerStats = props.world.getStorage('Stats').get(props.playerEntity)
 
 
 // Convertir los movimientos del ECS al formato esperado por la UI
-const playerMovesFormatted: PokemonMove[] = playerMoves.map(move => ({
+const playerMovesFormatted: PokemonMove[] = playerMoves.map((move, index) => ({
   id: move.id,
   name: move.name,
   power: move.power,
   accuracy: move.accuracy,
   type: move.type,
-  category: move.category
+  category: move.category,
+  index: index
 }))
 
 function handleMoveSelected(move: PokemonMove) {

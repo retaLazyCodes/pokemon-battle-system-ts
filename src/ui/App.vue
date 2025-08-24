@@ -11,6 +11,14 @@ const pokemon2 = ref<PokemonDetails | null>(null)
 
 function handleMoveSelected(move: PokemonMove) {
   console.log(`Movimiento seleccionado: ${move.name}`)
+  console.log(move)
+  // Emitir evento al eventBus para procesar la acción del jugador
+  if (game) {
+    game.eventBus.emit('playerAction', {
+      type: 'attack',
+      moveIndex: move.index
+    })
+  }
 }
 
 onMounted(async () => {
