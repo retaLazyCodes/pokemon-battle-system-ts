@@ -3,16 +3,19 @@ import { ComponentStorage } from '@game/ecs/ComponentStorage';
 import { NameComponent } from '@game/components/NameComponent';
 import { HealthComponent } from '@game/components/HealthComponent';
 import { MoveComponent, MoveCategory } from '@game/components/MoveComponent';
+import { SpriteComponent } from '@game/components/SpriteComponent';
 import { PokemonDetails, PokemonMove } from '@shared/services/pokemonApi';
 
 export function loadBattle(world: World, pokemons: PokemonDetails[]) {
     const names = new ComponentStorage<NameComponent>();
     const healths = new ComponentStorage<HealthComponent>();
     const moves = new ComponentStorage<MoveComponent>();
+    const sprites = new ComponentStorage<SpriteComponent>();
 
     world.addComponentStorage('Name', names);
     world.addComponentStorage('Health', healths);
     world.addComponentStorage('Move', moves);
+    world.addComponentStorage('Sprite', sprites);
 
     pokemons.forEach(pokemon => {
         console.log(pokemon)
@@ -28,6 +31,11 @@ export function loadBattle(world: World, pokemons: PokemonDetails[]) {
                 type: m.type,
                 category: m.category as MoveCategory
             }))
+        ));
+        sprites.add(entity, new SpriteComponent(
+            pokemon.images.front,
+            pokemon.images.back,
+            pokemon.images.icon
         ));
     });
 

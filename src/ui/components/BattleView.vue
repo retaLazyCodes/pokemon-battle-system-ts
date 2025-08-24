@@ -2,21 +2,39 @@
 import BattleScene from './BattleScene.vue'
 import AttackButtons from './AttackButtons.vue'
 import { PokemonMove } from '@shared/services/pokemonApi'
+import { World } from '@game/ecs/World'
+import { Entity } from '@game/ecs/Entity'
 
 const props = defineProps<{
-  playerSprite: string
-  enemySprite: string
+  world: World
+  playerEntity: Entity
+  enemyEntity: Entity
   background?: string
-  playerName: string
-  enemyName: string
-  playerMoves: PokemonMove[]
-  playerHP: number
-  playerMaxHP: number
 }>()
 
 const emit = defineEmits<{
   moveSelected: [move: PokemonMove]
 }>()
+
+// Extraer información de las entidades usando el sistema ECS
+const playerName = props.world.getStorage('Name').get(props.playerEntity)?.name ?? 'Unknown'
+const enemyName = props.world.getStorage('Name').get(props.enemyEntity)?.name ?? 'Unknown'
+const playerHealth = props.world.getStorage('Health').get(props.playerEntity)
+const playerMoves = props.world.getStorage('Move').get(props.playerEntity)?.moves ?? []
+const playerSprite = props.world.getStorage('Sprite').get(props.playerEntity)?.backSprite ?? ''
+const playerIcon = props.world.getStorage('Sprite').get(props.playerEntity)?.iconSprite ?? ''
+const enemySprite = props.world.getStorage('Sprite').get(props.enemyEntity)?.frontSprite ?? ''
+
+
+// Convertir los movimientos del ECS al formato esperado por la UI
+const playerMovesFormatted: PokemonMove[] = playerMoves.map(move => ({
+  id: move.id,
+  name: move.name,
+  power: move.power,
+  accuracy: move.accuracy,
+  type: move.type,
+  category: move.category
+}))
 
 function handleMoveSelected(move: PokemonMove) {
   emit('moveSelected', move)
@@ -26,17 +44,17 @@ function handleMoveSelected(move: PokemonMove) {
 <template>
   <div>
     <BattleScene
-      :playerSprite="props.playerSprite"
-      :enemySprite="props.enemySprite"
+      :playerSprite="playerSprite"
+      :enemySprite="enemySprite"
       :background="props.background"
-      :playerName="props.playerName"
-      :enemyName="props.enemyName"
+      :playerName="playerName"
+      :enemyName="enemyName"
     />
     <AttackButtons 
-      :moves="props.playerMoves"
-      :pokemonName="props.playerName"
-      :pokemonHP="props.playerHP"
-      :pokemonMaxHP="props.playerMaxHP"
+      :moves="playerMovesFormatted"
+      :pokemonName="playerName"
+      :pokemonHP="playerHealth?.current ?? 0"
+      :pokemonMaxHP="playerHealth?.max ?? 0"
       @moveSelected="handleMoveSelected"
     />
   </div>

@@ -30,13 +30,9 @@ onMounted(async () => {
     <div v-if="loading">Loading Pokémon...</div>
     <BattleView
       v-else
-      :playerSprite="pokemon1?.images.back ?? ''"
-      :enemySprite="pokemon2?.images.front ?? ''"
-      :playerName="pokemon1?.name ?? ''"
-      :enemyName="pokemon2?.name ?? ''"
-      :playerMoves="pokemon1?.moves || []"
-      :playerHP="pokemon1?.stats.hp ?? 100"
-      :playerMaxHP="pokemon1?.stats.hp ?? 100"
+      :world="game?.world"
+      :playerEntity="game?.world?.entityManager.getEntity(0)"
+      :enemyEntity="game?.world?.entityManager.getEntity(1)"
       @moveSelected="handleMoveSelected"
     />
   </div>

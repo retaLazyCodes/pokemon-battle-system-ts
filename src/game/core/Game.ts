@@ -28,7 +28,7 @@ import { PokemonDetails } from '@shared/services/pokemonApi';
 export class Game {
     private engine: Engine;
     private eventBus: EventBus;
-    private world: World;
+    public world: World;
     private battleUI: BattleUI;
 
     constructor() {
